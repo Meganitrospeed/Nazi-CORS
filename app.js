@@ -9,32 +9,48 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var fs = require('fs-js');
 var app = express();
+var debug =0;
+var actualizaciones = 0;
 
 //Function that downloads the XMl and renames it to the current public directory to bypass CORS
-function xml {
+function xml (){
     wget({
-            url: ' http://www.bne.es/media/datosgob/dibi/bibliotecas.xml',
+            url:  'http://www.bne.es/media/datosgob/dibi/bibliotecas.xml',
             dest: 'biblio.xml',      // destination path or path with filenname, default is ./
             timeout: 2000       // duration to wait for request fulfillment in milliseconds, default is 2 seconds
         },
         function (error, response, body) {
             if (error) {
-                console.log('--- error:');
-                console.log(error);            // error encountered
-            }
-            if (debug=1) {
                 console.log('--- headers:');
                 console.log(response.headers); // response headers
                 console.log('--- body:');
                 console.log(body);             // content of package
+                console.log('--- error:');
+                console.log(error);            // error encountered
+            }
+/*            if (debug=1) {
+                console.log('--- headers:');
+                console.log(response.headers); // response headers
+                console.log('--- body:');
+                console.log(body);             // content of package
+                console.log("Actualizado");
+            }*/ else{
+                console.log("Actualizado " + actualizaciones);
+                rename();
+                actualizaciones++;
             }
         }
     );
+};
+function rename (){
     fs.rename('biblio.xml', 'C:\\Users\\Rudiger\\WebstormProjects\\Nazi-CORS\\public\\biblio.xml', (err) => {
         if (err) throw err;
         console.log('renamed complete');
     });
 };
+//TIEMPO DE ACTUALIACION BAJAR PARA MAS FRECUENCIA
+setInterval(xml, 6000);
+//TIEMPO DE ACTUALIZACION
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
