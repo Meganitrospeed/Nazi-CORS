@@ -1,16 +1,23 @@
-var wget = require('node-wget');
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var fs = require('fs-js');
+var updates = 0;
+//EXPRESS <3
 var app = express();
+//RELATED TO THE WEB REQUEST AND RENAMING ( WGET gets the file, then FS renames it )
+var wget = require('node-wget');
+var fs = require('fs-js');
+
+
+//DEBUG VARIABLE LEAVE AT 0 AT ALL TIMES!!!
 var debug =0;
-var actualizaciones = 0;
+
+
 
 //Function that downloads the XMl and renames it to the current public directory to bypass CORS
 function xml (){
@@ -35,9 +42,9 @@ function xml (){
                 console.log(body);             // content of package
                 console.log("Actualizado");
             }*/ else{
-                console.log("Actualizado " + actualizaciones);
+                console.log("Actualizado " + updates);
                 rename();
-                actualizaciones++;
+                updates++;
             }
         }
     );
@@ -48,9 +55,9 @@ function rename (){
         console.log('renamed complete');
     });
 };
-//TIEMPO DE ACTUALIACION BAJAR PARA MAS FRECUENCIA
+//THE TIME IT TAKES TO UPDATE INCREASE TO AUMENT THE FREQUENCY
 setInterval(xml, 6000);
-//TIEMPO DE ACTUALIZACION
+//Be carefull to what you set this, as it can cause a WAF to BAN your IP
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
