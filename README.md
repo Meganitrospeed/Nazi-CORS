@@ -1,6 +1,6 @@
 # Nazi-CORS
 
-Nazi CORS is a NodeJS project that I made as a solution to CORS errors students at IES El Rincon where having while making XLST transformations directly in the client
+Nazi CORS is a NodeJS project that I made as a solution to CORS errors that students at IES El Rincon where having while making XLST transformations directly in the client
 Its called NAZI CORS as a critique to all the "OPEN DATA" websites that have rate limiting and CORS headers that prohibit several tipes of requests
 ## Installation
 
