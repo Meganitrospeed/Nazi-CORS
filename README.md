@@ -22,6 +22,10 @@ This line needs to be changed, it indicates what file gets downloaded
 ```
 This line indicates where the file is saved, and where to save the renamed file. we make this as a security feature in case the server banned us or timed us out, we handle the error in such a way that there is always a .xml with data avaiable to make a fresh transformation
 
+After that you need to execute the script with
+```
+node bin/www
+```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
